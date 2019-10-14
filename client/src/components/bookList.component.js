@@ -77,6 +77,7 @@ export default class BookList extends Component {
                             <th>Description</th>
                             <th>Image</th>
                             <th>Link</th>
+                            <th>Edit/Delete</th>
                         </tr>
                     </thead>
                     <tbody>

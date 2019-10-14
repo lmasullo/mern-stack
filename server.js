@@ -23,9 +23,9 @@ const PORT = process.env.PORT || 4000;
 // app.use(express.static('public'));
 
 // Serve up static assets (usually on heroku)
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static('client/build'));
-// }
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
 
 // Sets the root route to /todos, all others are based on this
 // const bookRoutes = express.Router();

@@ -19,18 +19,21 @@ export default class EditBook extends Component {
             description:'',
             link:'',
             image:'',
-            //books:[],
         }
     }
 
-    // componentDidMount(){
-    //     //This is a test book, will pull from mongo
-    //     //1:12 mins shows how to loop over array and fill select
-    //     this.setState({
-    //         books: ['test book'],
-    //         title: 'test title',
-    //     })
-    // }
+    componentDidMount(){
+        axios.get('http://localhost:4000/books/'+this.props.match.params.id)
+        .then(response => {
+            this.setState({
+                title: response.data.title,
+                description: response.data.description,
+            })
+        })
+        .catch(err => {
+            console.log(err);          
+        })
+    }
 
     onChangeTitle(e){
         this.setState({
@@ -58,18 +61,17 @@ export default class EditBook extends Component {
 
         //Send to back-end, look at routes/books.js
         //todo need to change to production and local db
-        axios.post('http://localhost:4000/books/update'+this.props.match.params.id, book)
+        axios.post('http://localhost:4000/books/update/'+this.props.match.params.id, book)
         .then(res => console.log(res.data))
         .catch(err => console.log(err));
-
-        //window.location = '/';
 
         //Clear the fields
         this.setState({
             title: "",
             description: "",
-        })
-        
+        })      
+
+        window.location = '/';
     }
     
     render(){
