@@ -71,6 +71,7 @@ export default class EditBook extends Component {
             description: "",
         })      
 
+        //Go back to the book list
         window.location = '/';
     }
     

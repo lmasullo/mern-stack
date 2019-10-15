@@ -2,13 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-// const axios = require('axios');
-// const path = require('path');
-
-// const router = require('express').Router();
-
-// Require all models
-// const Book = require('./models/Book');
+const path = require('path');
 
 // Initialize Express Server
 const app = express();
@@ -18,9 +12,6 @@ app.use(cors());
 
 // Set port
 const PORT = process.env.PORT || 4000;
-
-// Make public a static folder
-// app.use(express.static('public'));
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
@@ -52,24 +43,18 @@ mongoose
     console.log(err);
   });
 
-// Display connection message
-// const { connection } = mongoose;
-// connection.once('open', function() {
-//   console.log('MongoDB database connection established successfully');
-// });
-
-// Send every other request to the React app
-// Define any API routes before this runs
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, './client/build/index.html'));
-// });
-
 // Require routes
 const booksRoutes = require('./Routes/books');
 
 // Sets the base route as localhost:4000/books
 // All routes will be off books
 app.use('/books', booksRoutes);
+
+// Send every other request to the React app
+// Define any API routes before this runs
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
+});
 
 //! Start the server **********************************************
 app.listen(PORT, function() {

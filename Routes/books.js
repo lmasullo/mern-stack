@@ -55,6 +55,7 @@ router.route('/update/:id').post((req, res) => {
   Book.findById(req.params.id)
     .then(dbBook => {
       dbBook.title = req.body.title;
+      dbBook.description = req.body.description;
       // res.json(req.body.title);
       dbBook.save().then(() => res.json(dbBook));
       // If we were able to successfully update a book, send it back
